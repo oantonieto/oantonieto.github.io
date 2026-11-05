@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teste o Rolê SP</title><meta name="description" content="Inscreva-se para testar o app de lugares em São Paulo. Só para Android."><meta name="robots" content="noindex">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Rolê SP">
+<meta property="og:title" content="Teste o Rolê SP"><meta property="og:description" content="Inscreva-se para testar o app de lugares em São Paulo. Só para Android.">
+<meta property="og:url" content="https://oantonieto.github.io/beta/">
+<style>:root{--tinta:#14213D;--apoio:#69707D;--fio:#DDDDDD}*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--tinta);font:16px/1.5 Figtree,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:560px;margin:0 auto;padding:24px}img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:20px}
+h1{font-size:28px;line-height:1.2;font-weight:600;margin:20px 0 4px}h2{font-size:20px;font-weight:600;margin:28px 0 4px}p{margin:8px 0}
+.apoio{color:var(--apoio)}.botao{display:block;margin-top:24px;padding:14px;border-radius:12px;background:var(--tinta);color:#fff;text-align:center;font-weight:600;text-decoration:none}
+.cartaz{display:flex;align-items:flex-end;aspect-ratio:3/2;padding:24px;border-radius:20px;background:#F7F7F7;font-size:32px;line-height:1.1;font-weight:600}
+footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--fio);font-size:13px;color:var(--apoio)}a{color:inherit}</style></head><body><main><style>
+form{display:grid;gap:14px;margin-top:20px}label{display:grid;gap:4px;font-weight:600;font-size:14px}
+input[type=text],input[type=email]{font:inherit;font-weight:400;padding:12px;border:1px solid var(--fio);border-radius:12px;width:100%;color:var(--tinta);background:#fff}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--tinta);outline-offset:2px}
+.aceite{display:flex;grid-template-columns:none;gap:10px;align-items:flex-start;font-weight:400;font-size:14px}.aceite input{margin-top:3px;width:18px;height:18px;flex:none}
+button{font:inherit;font-weight:600;padding:14px;border:0;border-radius:12px;background:var(--tinta);color:#fff;cursor:pointer}button:disabled{opacity:.6}
+.isca{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}.erro{color:#b42318;font-size:14px}[hidden]{display:none!important}ol{padding-left:20px}li{margin:6px 0}
+</style>
+<h1>Teste o Rolê SP</h1>
+<p class="apoio">Um app de lugares em São Paulo, do centro à periferia, com o preço à vista. Por enquanto, só para Android.</p>
+<form id="inscricao" novalidate>
+<label>Nome<input type="text" id="nome" name="nome" autocomplete="name" required maxlength="120"></label>
+<label>E-mail<input type="email" id="email" name="email" autocomplete="email" required maxlength="254"></label>
+<div class="isca" aria-hidden="true"><label>Não preencha<input type="text" id="site" tabindex="-1" autocomplete="off"></label></div>
+<label class="aceite"><input type="checkbox" id="aceite" required><span>Aceito que usem meu nome e e-mail para acompanhar o teste e enviar pesquisas sobre ele, como explica a <a href="https://oantonieto.github.io/privacidade/" target="_blank" rel="noreferrer">Política de Privacidade</a>.</span></label>
+<p class="erro" id="erro" role="alert" hidden></p>
+<button type="submit" id="enviar">Quero testar</button>
+</form>
+<noscript><p class="erro">Para se inscrever, ative o JavaScript no navegador.</p></noscript>
+<section id="pronto" hidden>
+<h2 tabindex="-1" id="pronto-titulo">Pronto! Agora é só instalar</h2>
+<a class="botao" href="https://github.com/oantonieto/oantonieto.github.io/releases/latest/download/rolesp-beta.apk">Baixar o app para Android</a>
+<ol>
+<li>Abra esta página no celular e baixe o arquivo.</li>
+<li>Toque no arquivo baixado. Se o Android pedir, permita instalar por este navegador.</li>
+<li>Se aparecer um aviso do Google Play Protect, toque em "Instalar mesmo assim". Ele aparece porque o app ainda não está na loja.</li>
+<li>Abra o Rolê SP.</li>
+</ol>
+<p class="apoio">O app ainda está em teste. O que aparece como "a confirmar" pode estar errado, então vale conferir antes de sair.</p>
+</section>
+<script>
+(function () {
+  var URL_RPC = "https://dvmsggkofviyutwtmrqa.supabase.co/rest/v1/rpc/inscrever_testador";
+  var CHAVE = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2bXNnZ2tvZnZpeXV0d3RtcnFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM4MDUyNTMsImV4cCI6MjEwOTM4MTI1M30.90Pcl5qzCythEzW-VOBPM74RbwR63xRZts_qZYBiYek";
+  var form = document.getElementById('inscricao');
+  var erro = document.getElementById('erro');
+  var pronto = document.getElementById('pronto');
+  var botao = document.getElementById('enviar');
+  function mostrarPronto(foco) {
+    form.hidden = true;
+    pronto.hidden = false;
+    if (foco) document.getElementById('pronto-titulo').focus();
+  }
+  function avisar(texto) { erro.textContent = texto; erro.hidden = false; }
+  try { if (localStorage.getItem('rolesp-beta') === '1') mostrarPronto(false); } catch (e) {}
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    erro.hidden = true;
+    var nome = document.getElementById('nome').value.trim();
+    var email = document.getElementById('email').value.trim();
+    // Quem preenche o campo escondido é robô: parece que deu certo, e nada é gravado.
+    if (document.getElementById('site').value) return mostrarPronto(true);
+    if (nome.length < 2) return avisar('Informe seu nome.');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return avisar('Confira o e-mail.');
+    if (!document.getElementById('aceite').checked) return avisar('Para continuar, marque o aceite.');
+    botao.disabled = true;
+    botao.textContent = 'Enviando...';
+    fetch(URL_RPC, {
+      method: 'POST',
+      headers: { apikey: CHAVE, Authorization: 'Bearer ' + CHAVE, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_nome: nome, p_email: email, p_aceitou: true })
+    }).then(function (r) {
+      if (r.ok) {
+        try { localStorage.setItem('rolesp-beta', '1'); } catch (e) {}
+        return mostrarPronto(true);
+      }
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        avisar(j.message === 'muitos_cadastros' ? 'Muitas inscrições agora. Tente de novo em alguns minutos.' : 'Não deu para concluir. Confira os dados e tente de novo.');
+      });
+    }).catch(function () {
+      avisar('Sem conexão. Confira a internet e tente de novo.');
+    }).then(function () {
+      botao.disabled = false;
+      botao.textContent = 'Quero testar';
+    });
+  });
+})();
+</script>
+<footer>Rolê SP · <a href="https://oantonieto.github.io/privacidade/">Política de Privacidade</a></footer></main></body></html>
