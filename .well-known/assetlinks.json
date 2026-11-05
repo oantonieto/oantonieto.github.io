@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.rolesp.app",
+      "sha256_cert_fingerprints": [
+        "F4:FB:07:05:54:9A:1B:BC:A2:89:A8:93:52:0B:6B:F3:14:54:CA:8C:7F:9E:3E:A1:C8:79:40:B2:24:5E:56:13"
+      ]
+    }
+  }
+]
