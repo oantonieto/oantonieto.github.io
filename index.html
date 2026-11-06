@@ -19,6 +19,22 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://dvmsggkofviyutwtmrqa.supabase.co" />
     <link rel="preconnect" href="https://tiles.openfreemap.org" />
+    <style>#abertura{--x:0px;--y:0px;--e:.9;position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background-color:#fff;transition:background-color .42s ease}
+#abertura .logo{width:200px;height:auto;transition:transform .46s cubic-bezier(.45,0,.2,1),opacity .24s ease .22s}
+#abertura.sai{background-color:transparent;pointer-events:none}#abertura.sai .logo{transform:translate(var(--x),var(--y)) scale(var(--e));opacity:0}#abertura.sai p,#abertura.sai a{display:none}
+#abertura .t{opacity:0;stroke-dasharray:1;stroke-dashoffset:1;animation:surge .01s linear var(--a) forwards,desenha var(--d) cubic-bezier(.45,0,.3,1) var(--a) forwards}
+#abertura .pop{opacity:0;transform-box:fill-box;transform-origin:center;animation:pop .28s cubic-bezier(.3,1.5,.5,1) var(--a) forwards}
+#abertura .cometa{opacity:0;stroke:#E9743A;stroke-dasharray:.2 1;stroke-dashoffset:.2;animation:cometa 1.5s ease-in-out 1.5s infinite}
+#abertura .espera,#abertura .denovo{margin:16px 0 0;font:500 15px Figtree,system-ui,sans-serif;color:#5F6B64;opacity:0;animation:surge .3s ease 6s forwards}
+#abertura .denovo{color:#1E4D3B;animation-delay:25s;visibility:hidden;animation-name:liberar}
+@keyframes surge{to{opacity:1}}@keyframes desenha{to{stroke-dashoffset:0}}@keyframes pop{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}
+@keyframes cometa{0%{opacity:0;stroke-dashoffset:.2}12%{opacity:1}88%{opacity:1}100%{opacity:0;stroke-dashoffset:-1}}@keyframes liberar{to{opacity:1;visibility:visible}}
+.volta #abertura .t{animation-duration:.01s,.22s;animation-delay:0s}.volta #abertura .pop{animation-delay:0s;animation-duration:.01s}
+@media (prefers-reduced-motion:reduce){#abertura .t{animation:none;opacity:1;stroke-dashoffset:0}#abertura .pop{animation:none;opacity:1}#abertura .cometa{display:none}#abertura,#abertura .logo{transition:none}#abertura .logo{transition:opacity .2s}}
+</style><noscript><style>#abertura{display:none}</style></noscript>
+    <script>(function(){var m=1400;try{if(localStorage.getItem('simbo.catalogo.v1')){document.documentElement.classList.add('volta');m=0}}catch(e){}window.__aberturaMinimo=m;
+if(window.fetch){var k="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2bXNnZ2tvZnZpeXV0d3RtcnFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM4MDUyNTMsImV4cCI6MjEwOTM4MTI1M30.90Pcl5qzCythEzW-VOBPM74RbwR63xRZts_qZYBiYek";window.__catalogo=fetch("https://dvmsggkofviyutwtmrqa.supabase.co/rest/v1/places?select=id%2Cname%2Cslug%2Cshort_description%2Cdescription%2Cprice_range%2Cprice_min%2Cprice_avg%2Ccover_price%2Cmin_consumption%2Ceditorial_score%2Caddress%2Cinstagram%2Clat%2Clng%2Cmetro_line%2Cmetro_station%2Cmetro_walk_minutes%2Cmood_tags%2Chours%2Cverified_at%2Cwhat_to_order%2Ccategories(name%2Cslug)%2Cneighborhoods(name%2Czone)%2Ccurators(name%2Cbio_short)%2Cplace_photos(path%2Cautor%2Clicenca%2Cpagina)&status=eq.active",{headers:{apikey:k,Authorization:'Bearer '+k}}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})}
+if('serviceWorker' in navigator)addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){})})})()</script>
     <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
     <style id="expo-reset">
       /* These styles make the body full-height */
@@ -37,7 +53,7 @@
         flex: 1;
       }
     </style>
-  <link rel="preload" href="/_expo/static/css/maplibre-gl-251fdbfda84eb147f0a36795135ef43b.css" as="style"><link rel="stylesheet" href="/_expo/static/css/maplibre-gl-251fdbfda84eb147f0a36795135ef43b.css"><link rel="preload" href="/_expo/static/css/global-b069652f22281e8e18a7ec166c779ebd.css" as="style"><link rel="stylesheet" href="/_expo/static/css/global-b069652f22281e8e18a7ec166c779ebd.css"><link rel="icon" href="/favicon.ico" /></head>
+  <link rel="preload" href="/_expo/static/css/maplibre-gl-251fdbfda84eb147f0a36795135ef43b.css" as="style"><link rel="stylesheet" href="/_expo/static/css/maplibre-gl-251fdbfda84eb147f0a36795135ef43b.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/_expo/static/css/maplibre-gl-251fdbfda84eb147f0a36795135ef43b.css"></noscript><link rel="preload" href="/_expo/static/css/global-0275f040ecb8f3e112bc8324a6067881.css" as="style"><link rel="stylesheet" href="/_expo/static/css/global-0275f040ecb8f3e112bc8324a6067881.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/_expo/static/css/global-0275f040ecb8f3e112bc8324a6067881.css"></noscript><link rel="icon" href="/favicon.ico" /><link rel="prefetch" as="script" href="/_expo/static/js/web/maplibre-gl-1c0c87d46876a2037b0efc9dc2b8fcde.js" /><link rel="prefetch" as="script" href="/_expo/static/js/web/maplibre-gl-1c0c87d46876a2037b0efc9dc2b8fcde.js" /></head>
 
   <body>
     <!-- Use static rendering with Expo Router to support running without JavaScript. -->
@@ -45,7 +61,7 @@
       O Simbó precisa de JavaScript para funcionar. Ative no navegador e recarregue a página.
     </noscript>
     <!-- The root element for your Expo app. -->
-    <div id="root"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#FFFFFF"><div style="width:200px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 170" role="img" aria-label="Simbó"><g fill="none" stroke="#1E4D3B" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"><path d="M12 134C40 134 68 114 76 84C80 66 73 54 62 56C49 58 50 78 60 96C70 113 84 124 76 138C68 152 40 152 32 130"/><path d="M64 148C84 148 100 128 108 96C103 118 98 146 118 148C134 149 146 128 154 96C151 114 147 132 146 148C152 116 166 88 179 90C192 92 180 128 177 148C188 116 202 88 215 90C228 92 214 128 217 138C220 150 238 146 250 124C266 96 288 46 276 24C266 8 250 24 248 62C246 92 244 116 248 132C254 152 282 152 292 130C301 108 288 94 268 98C288 104 308 104 326 94C308 100 302 124 311 138C321 152 350 150 358 124C362 102 344 88 326 94"/><path d="M360 116C392 102 430 102 464 114C486 122 508 122 528 110"/><path d="M340 68L358 42" stroke="#E9743A"/></g><circle cx="113" cy="62" r="9.5" fill="#1E4D3B"/></svg></div></div></div>
-  <script src="/_expo/static/js/web/entry-3af23cb37b4698061af5c68807a2ec53.js" defer></script>
+    <div id="root"></div><div id="abertura" role="status" aria-label="Carregando o Simbó"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 170" role="img" aria-label="Simbó"><g fill="none" stroke="#1E4D3B" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"><path class="t" style="--d:.34s;--a:.05s" pathLength="1" d="M12 134C40 134 68 114 76 84C80 66 73 54 62 56C49 58 50 78 60 96C70 113 84 124 76 138C68 152 40 152 32 130"/><path class="t" style="--d:.72s;--a:.34s" pathLength="1" d="M64 148C84 148 100 128 108 96C103 118 98 146 118 148C134 149 146 128 154 96C151 114 147 132 146 148C152 116 166 88 179 90C192 92 180 128 177 148C188 116 202 88 215 90C228 92 214 128 217 138C220 150 238 146 250 124C266 96 288 46 276 24C266 8 250 24 248 62C246 92 244 116 248 132C254 152 282 152 292 130C301 108 288 94 268 98C288 104 308 104 326 94C308 100 302 124 311 138C321 152 350 150 358 124C362 102 344 88 326 94"/><path class="t" style="--d:.32s;--a:1.02s" pathLength="1" d="M360 116C392 102 430 102 464 114C486 122 508 122 528 110"/><path class="cometa" pathLength="1" d="M360 116C392 102 430 102 464 114C486 122 508 122 528 110"/><path class="pop" style="--a:1.14s" stroke="#E9743A" d="M340 68L358 42"/></g><circle class="pop" style="--a:.5s" cx="113" cy="62" r="9.5" fill="#1E4D3B"/></svg><p class="espera">Ainda carregando…</p><a class="denovo" href="">Tentar de novo</a></div>
+  <script src="/_expo/static/js/web/entry-0f6971fa03463da1663ac61e6bc3cf57.js" defer></script>
 </body>
 </html>
