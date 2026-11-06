@@ -1,14 +1,15 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vamos aonde? | Rolê SP</title><meta name="description" content="Em São Paulo, sempre tem um lugar para ir. Já são 161, e vem muito mais por aí. Entre no teste do app, só para Android."><meta name="robots" content="noindex">
-<meta property="og:type" content="website"><meta property="og:site_name" content="Rolê SP">
-<meta property="og:title" content="Vamos aonde? | Rolê SP"><meta property="og:description" content="Em São Paulo, sempre tem um lugar para ir. Já são 161, e vem muito mais por aí. Entre no teste do app, só para Android.">
+<title>Vamos aonde? | Simbó</title><meta name="description" content="Em São Paulo, sempre tem um lugar para ir. Já são 161, e vem muito mais por aí. Entre no teste do app, só para Android."><meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="https://oantonieto.github.io/favicon.svg"><link rel="apple-touch-icon" href="https://oantonieto.github.io/marca/icone-180.png"><meta name="theme-color" content="#FFFFFF">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Simbó">
+<meta property="og:title" content="Vamos aonde? | Simbó"><meta property="og:description" content="Em São Paulo, sempre tem um lugar para ir. Já são 161, e vem muito mais por aí. Entre no teste do app, só para Android.">
 <meta property="og:url" content="https://oantonieto.github.io/beta/"><meta property="og:image" content="https://oantonieto.github.io/fotos/mercadao.jpg"><meta name="twitter:card" content="summary_large_image">
 <style>@font-face{font-family:Figtree;font-weight:400;font-display:swap;src:url(https://oantonieto.github.io/fontes/Figtree_400Regular.ttf)}
 @font-face{font-family:Figtree;font-weight:600;font-display:swap;src:url(https://oantonieto.github.io/fontes/Figtree_600SemiBold.ttf)}
-:root{--tinta:#14213D;--apoio:#69707D;--fio:#DDDDDD}*{box-sizing:border-box}
+:root{--tinta:#1E4D3B;--apoio:#5F6B64;--fio:#DDDDDD}*{box-sizing:border-box}
 body{margin:0;background:#fff;color:var(--tinta);font:16px/1.5 Figtree,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:560px;margin:0 auto;padding:24px}img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:20px}
+.logo{display:block;width:120px;margin-bottom:16px}.logo svg{display:block;width:100%;height:auto}main{max-width:560px;margin:0 auto;padding:24px}img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:20px}
 h1{font-size:28px;line-height:1.2;font-weight:600;margin:20px 0 4px}h2{font-size:20px;font-weight:600;margin:28px 0 4px}p{margin:8px 0}
 .apoio{color:var(--apoio)}.botao{display:block;margin-top:24px;padding:14px;border-radius:12px;background:var(--tinta);color:#fff;text-align:center;font-weight:600;text-decoration:none}
 .cartaz{display:flex;align-items:flex-end;aspect-ratio:3/2;padding:24px;border-radius:20px;background:#F7F7F7;font-size:32px;line-height:1.1;font-weight:600}
@@ -19,12 +20,12 @@ footer{margin-top:32px;padding-top:16px;border-top:1px solid var(--fio);font-siz
 .acao{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border:0;border-radius:12px;font:inherit;font-size:17px;font-weight:600;text-decoration:none;cursor:pointer;transition:transform .16s ease,opacity .16s ease}
 .acao:active{transform:scale(.97)}.acao.clara{background:#fff;color:var(--tinta)}.acao.tinta{background:var(--tinta);color:#fff}
 
-.marca{display:block;padding:16px 20px;font-size:20px;font-weight:600}
+.marca{display:block;padding:16px 20px}.marca svg{display:block;width:132px;height:auto}
 .capa{display:grid;gap:16px;padding:0 20px}
 .capa h1{font-size:clamp(46px,5vw,72px);line-height:1.05;font-weight:600}.capa-texto p{font-size:19px;line-height:1.4;margin-top:10px;max-width:26em}
 .capa figure{margin:0}.moldura{position:relative;overflow:hidden;border-radius:16px;height:clamp(240px,calc(100svh - 420px),560px);background:#F7F7F7}
 .moldura img{width:100%;height:100%;object-fit:cover;transition:opacity .25s ease}.trocando #s-foto{opacity:.35}
-.moldura .acao{position:absolute;right:12px;bottom:12px;min-height:48px;padding:0 20px;box-shadow:0 2px 12px rgba(20,33,61,.24)}
+.moldura .acao{position:absolute;right:12px;bottom:12px;min-height:48px;padding:0 20px;box-shadow:0 2px 12px rgba(30,77,59,.24)}
 .capa figcaption{margin-top:10px}.capa figcaption b{display:block;font-size:18px;font-weight:600;line-height:1.25}.capa figcaption span{font-size:15px;color:var(--apoio)}
 .credito{display:block;margin-top:2px;font-size:12px;color:var(--apoio)}.pedido .acao{width:100%}.pedido p{margin-top:8px;font-size:15px;color:var(--apoio);text-align:center}.convite{margin-top:10px!important;font-size:17px}
 
@@ -52,11 +53,11 @@ form .acao{width:100%}.acao:disabled{opacity:.6}
 .capa{grid-template-columns:5fr 6fr;grid-template-rows:1fr 1fr;column-gap:56px;row-gap:24px;max-width:1200px;margin:0 auto;padding:0 40px}
 .capa-texto{align-self:end}.capa figure{grid-column:2;grid-row:1/3}.pedido{align-self:start}.pedido .acao{width:auto}.pedido p{text-align:left}.moldura{height:min(calc(100vh - 210px),600px)}
 .mais{max-width:1200px;margin:0 auto;padding-top:96px}.mais h2,.mais>p{padding:0 40px}.trilho{padding:0 40px 4px;scroll-padding:40px}
-.entrar{margin-top:96px;padding:80px 40px}.solto footer{padding:32px 40px 40px}}</style></head><body class="solto"><main><span class="marca">Rolê SP</span>
+.entrar{margin-top:96px;padding:80px 40px}.solto footer{padding:32px 40px 40px}}</style></head><body class="solto"><main><span class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 170" role="img" aria-label="Simbó"><g fill="none" stroke="#1E4D3B" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"><path d="M12 134C40 134 68 114 76 84C80 66 73 54 62 56C49 58 50 78 60 96C70 113 84 124 76 138C68 152 40 152 32 130"/><path d="M64 148C84 148 100 128 108 96C103 118 98 146 118 148C134 149 146 128 154 96C151 114 147 132 146 148C152 116 166 88 179 90C192 92 180 128 177 148C188 116 202 88 215 90C228 92 214 128 217 138C220 150 238 146 250 124C266 96 288 46 276 24C266 8 250 24 248 62C246 92 244 116 248 132C254 152 282 152 292 130C301 108 288 94 268 98C288 104 308 104 326 94C308 100 302 124 311 138C321 152 350 150 358 124C362 102 344 88 326 94"/><path d="M360 116C392 102 430 102 464 114C486 122 508 122 528 110"/><path d="M340 68L358 42" stroke="#E9743A"/></g><circle cx="113" cy="62" r="9.5" fill="#1E4D3B"/></svg></span>
 <section class="capa" id="sorteio">
 <div class="capa-texto">
 <h1>Vamos aonde?</h1>
-<p>Em São Paulo, sempre tem um lugar para ir. O Rolê SP mostra onde.</p>
+<p>Em São Paulo, sempre tem um lugar para ir. O Simbó mostra onde.</p>
 </div>
 <figure><div class="moldura"><img id="s-foto" src="https://oantonieto.github.io/fotos/mercadao.jpg" alt="Mercado Municipal de São Paulo" fetchpriority="high"><button class="acao clara" type="button" id="s-outro" hidden>Outro lugar</button></div>
 <figcaption aria-live="polite"><b id="s-nome">Mercado Municipal de São Paulo</b><span id="s-onde">Sé</span><a class="credito" id="s-credito" href="https://commons.wikimedia.org/wiki/File:Municipal_Market_of_S%C3%A3o_Paulo_city.jpg" rel="noreferrer">Foto: Wilfredor (CC BY-SA 4.0)</a></figcaption></figure>
@@ -107,7 +108,7 @@ form .acao{width:100%}.acao:disabled{opacity:.6}
 <li>Abra esta página no celular e baixe o arquivo.</li>
 <li>Toque no arquivo baixado. Se o Android pedir, permita instalar por este navegador.</li>
 <li>Se aparecer um aviso do Google Play Protect, toque em "Instalar mesmo assim". Ele aparece porque o app ainda não está na loja.</li>
-<li>Abra o Rolê SP.</li>
+<li>Abra o Simbó. Por enquanto, o ícone no celular ainda aparece como Rolê SP.</li>
 </ol>
 </div>
 </div></section>
@@ -197,4 +198,4 @@ form .acao{width:100%}.acao:disabled{opacity:.6}
   });
 })();
 </script>
-<footer><details class="creditos"><summary>Créditos das fotos</summary><p>Mocotó Bar e Restaurante: <a href="https://www.guiadasemana.com.br/sao-paulo/restaurantes/estabelecimento/mocoto-bar-e-restaurante" rel="noreferrer">guiadasemana.com.br</a> (Uso autorizado) · Centro Cultural Quilombaque: <a href="https://ims.com.br/convida/comunidade-cultural-quilombaque/" rel="noreferrer">ims.com.br</a> (Uso autorizado) · Casa de Francisca: <a href="https://spcity.com.br/casa-de-francisca-a-menor-casa-de-shows-de-sao-paulo-e-brilhante/" rel="noreferrer">spcity.com.br</a> (Uso autorizado) · Parque do Carmo: <a href="https://commons.wikimedia.org/wiki/File:Parque_do_Carmo_Sao_Paulo.JPG" rel="noreferrer">Icleao</a> (CC BY-SA 3.0) · Bar Templo: <a href="https://www.tripadvisor.com.br/Attraction_Review-g303631-d7838410-Reviews-Bar_Templo-Sao_Paulo_State_of_Sao_Paulo.html" rel="noreferrer">tripadvisor.com.br</a> (Uso autorizado) · SESC Pompeia: <a href="https://commons.wikimedia.org/wiki/File:Lina_Bo_Bardi,_SESC_Pomp%C3%A9ia_(5391718290).jpg" rel="noreferrer">paulisson miura from Cuiabá, Brasil</a> (CC BY 2.0) · Seu Quintal Comedoria: <a href="https://www.tripadvisor.com.br/Restaurant_Review-g303631-d8535295-Reviews-Seu_Quintal-Sao_Paulo_State_of_Sao_Paulo.html" rel="noreferrer">tripadvisor.com.br</a> (Uso autorizado) · Armazém 77: <a href="https://portalmesadebar.com.br/armazem-77-completa-seis-anos/" rel="noreferrer">portalmesadebar.com.br</a> (Uso autorizado) · Beco do Batman: <a href="https://commons.wikimedia.org/wiki/File:Beco_do_Batman_-_55334479612.jpg" rel="noreferrer">xiquinhosilva</a> (CC BY 4.0)</p></details>Rolê SP · <a href="https://oantonieto.github.io/privacidade/">Política de Privacidade</a></footer></main></body></html>
+<footer><details class="creditos"><summary>Créditos das fotos</summary><p>Mocotó Bar e Restaurante: <a href="https://www.guiadasemana.com.br/sao-paulo/restaurantes/estabelecimento/mocoto-bar-e-restaurante" rel="noreferrer">guiadasemana.com.br</a> (Uso autorizado) · Centro Cultural Quilombaque: <a href="https://ims.com.br/convida/comunidade-cultural-quilombaque/" rel="noreferrer">ims.com.br</a> (Uso autorizado) · Casa de Francisca: <a href="https://spcity.com.br/casa-de-francisca-a-menor-casa-de-shows-de-sao-paulo-e-brilhante/" rel="noreferrer">spcity.com.br</a> (Uso autorizado) · Parque do Carmo: <a href="https://commons.wikimedia.org/wiki/File:Parque_do_Carmo_Sao_Paulo.JPG" rel="noreferrer">Icleao</a> (CC BY-SA 3.0) · Bar Templo: <a href="https://www.tripadvisor.com.br/Attraction_Review-g303631-d7838410-Reviews-Bar_Templo-Sao_Paulo_State_of_Sao_Paulo.html" rel="noreferrer">tripadvisor.com.br</a> (Uso autorizado) · SESC Pompeia: <a href="https://commons.wikimedia.org/wiki/File:Lina_Bo_Bardi,_SESC_Pomp%C3%A9ia_(5391718290).jpg" rel="noreferrer">paulisson miura from Cuiabá, Brasil</a> (CC BY 2.0) · Seu Quintal Comedoria: <a href="https://www.tripadvisor.com.br/Restaurant_Review-g303631-d8535295-Reviews-Seu_Quintal-Sao_Paulo_State_of_Sao_Paulo.html" rel="noreferrer">tripadvisor.com.br</a> (Uso autorizado) · Armazém 77: <a href="https://portalmesadebar.com.br/armazem-77-completa-seis-anos/" rel="noreferrer">portalmesadebar.com.br</a> (Uso autorizado) · Beco do Batman: <a href="https://commons.wikimedia.org/wiki/File:Beco_do_Batman_-_55334479612.jpg" rel="noreferrer">xiquinhosilva</a> (CC BY 4.0)</p></details>Simbó · <a href="https://oantonieto.github.io/privacidade/">Política de Privacidade</a></footer></main></body></html>
