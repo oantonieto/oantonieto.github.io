@@ -8,7 +8,7 @@ const PAGINA = `simbo-pagina-${VERSAO}`
 const LIMITES = { [PROGRAMA]: 12, [IMAGENS]: 400 }
 const ESPERA_DA_PAGINA = 2500
 // Estas páginas têm vida própria e nunca passam por aqui.
-const FORA = ['/beta', '/l/', '/painel', '/privacidade', '/.well-known', '/fotos/', '/fontes/']
+const FORA = ['/beta', '/l/', '/painel', '/privacidade', '/termos', '/.well-known', '/fotos/', '/fontes/']
 
 async function aparar(nome) {
   const caixa = await caches.open(nome)
