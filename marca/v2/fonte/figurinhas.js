@@ -1,39 +1,83 @@
-// Figurinhas da marca: formas chapadas, carinha e contorno branco de adesivo. Uso: node marca/v2/fonte/figurinhas.js
+// Figurinhas da marca: formas chapadas, um rosto pequeno e contorno branco de adesivo que acompanha o desenho.
+// Uso: node marca/v2/fonte/figurinhas.js
 const fs=require('fs'),path=require('path');
-const OUT=path.resolve(__dirname,'..'),RAIZ=path.resolve(OUT,'../..');
-const M='#1E4D3B',B='#E9743A',B2='#F2925F',P='#FBE9D7',A='#F3ECE1',T='#17231E',W='#FFFFFF';
-const n=v=>+v.toFixed(1);
-// --- peças ---
-const rosto=(x,y,s=1,cor=T,tipo='sorriso')=>{
-  const olhos=tipo==='feliz'?`<path d="M${n(x-19*s)} ${n(y-4*s)}q${n(6*s)} ${n(-9*s)} ${n(12*s)} 0M${n(x+7*s)} ${n(y-4*s)}q${n(6*s)} ${n(-9*s)} ${n(12*s)} 0" fill="none" stroke="${cor}" stroke-width="${n(5*s)}" stroke-linecap="round"/>`
-    :`<circle cx="${n(x-13*s)}" cy="${n(y-6*s)}" r="${n(4.8*s)}" fill="${cor}"/><circle cx="${n(x+13*s)}" cy="${n(y-6*s)}" r="${n(4.8*s)}" fill="${cor}"/>`;
-  const boca=tipo==='riso'?`<path d="M${n(x-24*s)} ${n(y+6*s)}h${n(48*s)}a${n(24*s)} ${n(24*s)} 0 0 1 ${n(-48*s)} 0z" fill="${cor}"/><rect x="${n(x-17*s)}" y="${n(y+6*s)}" width="${n(34*s)}" height="${n(8*s)}" rx="2" fill="${W}"/>`
-    :`<path d="M${n(x-13*s)} ${n(y+7*s)}q${n(13*s)} ${n(14*s)} ${n(26*s)} 0" fill="none" stroke="${cor}" stroke-width="${n(5*s)}" stroke-linecap="round"/>`;
-  return olhos+boca;};
-const brilho=(x,y,r,cor)=>`<path d="M${x} ${y-r}q${n(r*.18)} ${n(r*.82)} ${r} ${r}q${n(-r*.82)} ${n(r*.18)} ${-r} ${r}q${n(-r*.18)} ${n(-r*.82)} ${-r} ${-r}q${n(r*.82)} ${n(-r*.18)} ${r} ${-r}z" fill="${cor}"/>`;
-// --- formatos de selo (devolvem o SVG da forma numa cor; o contorno branco usa a mesma forma) ---
-const F={
- circulo:c=>`<circle cx="120" cy="120" r="100"/>`,
- arco:c=>`<path d="M40 204V110a80 80 0 0 1 160 0v94a16 16 0 0 1-16 16H56a16 16 0 0 1-16-16z"/>`,
- quadrado:c=>`<rect x="24" y="24" width="192" height="192" rx="46"/>`,
- flor:c=>`<circle cx="120" cy="120" r="80"/>`+Array.from({length:8},(_,i)=>{const a=i*Math.PI/4;return `<circle cx="${n(120+70*Math.cos(a))}" cy="${n(120+70*Math.sin(a))}" r="35"/>`;}).join(''),
- estrela:c=>`<path d="M${Array.from({length:28},(_,i)=>{const a=i*Math.PI/14-Math.PI/2,r=i%2?88:102;return `${n(120+r*Math.cos(a))} ${n(120+r*Math.sin(a))}`;}).join('L')}z"/>`,
- pilula:c=>`<rect x="14" y="62" width="212" height="116" rx="58"/>`,
-};
-const adesivo=(forma,cor,miolo,gira=0)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240"><g${gira?` transform="rotate(${gira} 120 120)"`:''}><g fill="${W}" stroke="${W}" stroke-width="14" stroke-linejoin="round">${F[forma]()}</g><g fill="${cor}"${forma==='estrela'?` stroke="${cor}" stroke-width="6" stroke-linejoin="round"`:''}>${F[forma]()}</g>${miolo}</g></svg>\n`;
+const OUT=path.resolve(__dirname,'..');
+const M='#1E4D3B',M2='#2A6350',B='#E9743A',B2='#F2925F',P='#FBE9D7',A='#F3ECE1',T='#17231E',W='#FFFFFF';
+const n=v=>+(+v).toFixed(1);
+// Cada elemento: [tag, atributos, opções]. opções.d = detalhe interno (não entra no contorno branco).
+const p=(d,fill,o={})=>['path',{d,fill},o];
+const l=(d,stroke,sw,o={})=>['path',{d,fill:'none',stroke,'stroke-width':sw,'stroke-linecap':'round','stroke-linejoin':'round',...(o.dash?{'stroke-dasharray':o.dash}:{}),...(o.op?{opacity:o.op}:{})},o];
+const c=(cx,cy,r,fill,o={})=>['circle',{cx,cy,r,fill,...(o.op?{opacity:o.op}:{})},o];
+const e=(cx,cy,rx,ry,fill,o={})=>['ellipse',{cx,cy,rx,ry,fill,...(o.rot?{transform:`rotate(${o.rot} ${cx} ${cy})`}:{})},o];
+const r=(x,y,width,height,rx,fill,o={})=>['rect',{x,y,width,height,rx,fill,...(o.rot?{transform:`rotate(${o.rot} ${x+width/2} ${y+height/2})`}:{})},o];
+const g=(tf,itens)=>['g',{transform:tf},{itens}];
+// Rosto: pequeno e junto, para ter jeito de personagem e não de emoji.
+function rosto(x,y,{s=1,cor=T,boca='sorriso',olho='ponto',bochecha=null}={}){
+  const D={d:1},o=[];
+  if(bochecha){o.push(c(n(x-17*s),n(y+6*s),n(4.6*s),bochecha,D),c(n(x+17*s),n(y+6*s),n(4.6*s),bochecha,D));}
+  o.push(c(n(x-8*s),y,n(3.4*s),cor,D));
+  if(olho==='pisca')o.push(l(`M${n(x+4*s)} ${n(y+1*s)}q${n(4*s)} ${n(-5*s)} ${n(8*s)} 0`,cor,n(3.2*s),D));else o.push(c(n(x+8*s),y,n(3.4*s),cor,D));
+  if(boca==='aberta')o.push(p(`M${n(x-6.5*s)} ${n(y+7*s)}h${n(13*s)}a${n(6.5*s)} ${n(6.5*s)} 0 0 1 ${n(-13*s)} 0z`,cor,D));
+  else if(boca==='o')o.push(c(x,n(y+10*s),n(3.6*s),cor,D));
+  else o.push(l(`M${n(x-6*s)} ${n(y+7.5*s)}q${n(6*s)} ${n(6.5*s)} ${n(12*s)} 0`,cor,n(3.4*s),D));
+  return o;
+}
+const arco=(cor)=>p('M44 206V112a76 76 0 0 1 152 0v94a14 14 0 0 1-14 14H58a14 14 0 0 1-14-14z',cor);
+const flor=(cor,cx=120,cy=124,R=64,rr=33,q=8)=>[c(cx,cy,R+8,cor),...Array.from({length:q},(_,i)=>{const a=i*2*Math.PI/q;return c(n(cx+R*Math.cos(a)),n(cy+R*Math.sin(a)),rr,cor);})];
+const estrela=(cor,cx=120,cy=124,R=100,r2=86,q=14)=>p('M'+Array.from({length:q*2},(_,i)=>{const a=i*Math.PI/q-Math.PI/2,rr=i%2?r2:R;return `${n(cx+rr*Math.cos(a))} ${n(cy+rr*Math.sin(a))}`;}).join('L')+'z',cor,{sj:1});
+
 const FIG={
- lugar:['circulo',M,`<path d="M120 206c-40-44-58-72-58-100a58 58 0 0 1 116 0c0 28-18 56-58 100z" fill="${B}"/><circle cx="120" cy="104" r="35" fill="${W}"/>${rosto(120,105,.95)}${brilho(50,150,11,A)}${brilho(192,160,8,A)}`],
- parques:['arco',P,`<rect x="109" y="150" width="22" height="56" rx="9" fill="${B}"/><g fill="${M}"><circle cx="120" cy="94" r="46"/><circle cx="83" cy="122" r="32"/><circle cx="157" cy="122" r="32"/><circle cx="120" cy="130" r="34"/></g>${rosto(120,110,1,A,'feliz')}<circle cx="172" cy="62" r="11" fill="${B}"/>`],
- 'cafes-padarias':['flor',B,`<ellipse cx="116" cy="180" rx="60" ry="10" fill="${T}"/><path d="M160 114h6a15 15 0 0 1 0 30h-8" fill="none" stroke="${W}" stroke-width="11" stroke-linecap="round"/><path d="M72 104h88v26a40 40 0 0 1-40 40h-8a40 40 0 0 1-40-40z" fill="${W}"/>${rosto(116,132,.95)}<path d="M100 88c-9-11 9-17 0-29M132 88c-9-11 9-17 0-29" fill="none" stroke="${W}" stroke-width="8" stroke-linecap="round"/>`],
- bares:['quadrado',M,`<path d="M154 114h10a16 16 0 0 1 16 16v18a16 16 0 0 1-16 16h-10" fill="none" stroke="${A}" stroke-width="12" stroke-linecap="round"/><rect x="70" y="92" width="86" height="102" rx="14" fill="${B2}"/><g fill="${W}"><circle cx="78" cy="92" r="17"/><circle cx="102" cy="82" r="21"/><circle cx="130" cy="84" r="19"/><circle cx="150" cy="94" r="15"/><rect x="64" y="90" width="98" height="17" rx="8"/><rect x="136" y="98" width="13" height="26" rx="6.500"/></g>${rosto(110,152,.95)}`],
- restaurantes:['circulo',M,`<circle cx="120" cy="120" r="88" fill="${P}"/><circle cx="120" cy="120" r="48" fill="${W}"/><circle cx="120" cy="120" r="36" fill="none" stroke="${B2}" stroke-width="6"/>${rosto(120,121,.9,T,'feliz')}<g fill="none" stroke="${M}" stroke-width="9" stroke-linecap="round"><path d="M46 80v20a9 9 0 0 0 18 0V80M55 80v84"/><path d="M186 164V80c13 9 13 38 0 50" fill="${M}" stroke-linejoin="round"/></g>`],
- cultura:['quadrado',B2,`<path d="M120 46 94 74M120 46l26 28" fill="none" stroke="${T}" stroke-width="5" stroke-linecap="round"/><circle cx="120" cy="46" r="7" fill="${T}"/><rect x="58" y="72" width="124" height="108" rx="12" fill="${M}"/><rect x="71" y="85" width="98" height="82" rx="5" fill="${P}"/><path d="M71 167v-12l22-18 20 14 22-22 34 28v10z" fill="${M}"/><circle cx="118" cy="116" r="19" fill="${B}"/>${rosto(118,117,.5)}`,-5],
- 'baladas-shows':['estrela',T,`<path d="M120 28v44" stroke="${A}" stroke-width="6" stroke-linecap="round"/><circle cx="120" cy="126" r="56" fill="${A}"/><path d="M120 70c-32 24-32 88 0 112M120 70c32 24 32 88 0 112M70 100h100M70 152h100" fill="none" stroke="${M}" stroke-width="4" opacity=".28"/><g fill="${T}"><rect x="84" y="106" width="32" height="22" rx="10"/><rect x="124" y="106" width="32" height="22" rx="10"/><rect x="110" y="110" width="20" height="6"/></g><path d="M104 144q16 15 32 0" fill="none" stroke="${T}" stroke-width="5" stroke-linecap="round"/>${brilho(54,70,12,B)}${brilho(188,176,10,B)}${brilho(186,62,6,B)}`],
- 'feiras-mercados':['arco',M,`<path d="M120 86V70" stroke="${A}" stroke-width="7" stroke-linecap="round"/><path d="M122 84c4-22 26-30 44-24-4 20-24 30-44 24z" fill="${A}"/><circle cx="120" cy="140" r="58" fill="${B}"/>${rosto(120,132,1.1,T,'riso')}`],
- experiencias:['pilula',M,`<path d="M50 88h140v18a14 14 0 0 0 0 28v18H50v-18a14 14 0 0 0 0-28z" fill="${B}"/><path d="M146 96v48" stroke="${M}" stroke-width="4" stroke-dasharray="1 9" stroke-linecap="round"/>${rosto(100,121,.85)}${brilho(166,120,9,A)}`,-9],
+ // o alfinete inclinado, saindo do selo, no fim de um caminho pontilhado
+ lugar:[c(120,138,84,M),l('M44 150c12 34 46 52 78 48',A,6,{dash:'.1 13',d:1}),e(126,202,30,7,M2,{d:1}),
+  g('rotate(8 120 206)',[p('M120 206c-41-45-60-75-60-104a60 60 0 0 1 120 0c0 29-19 59-60 104z',B),l('M76 96a46 46 0 0 1 20-34',B2,7,{d:1}),c(120,102,33,W,{d:1}),...rosto(120,102,{s:1.25,bochecha:B2})])],
+ // árvore florida num morrinho, com o sol atrás
+ parques:[arco(P),c(72,86,17,B,{d:1}),p('M44 184c28-13 58-12 76-4s52 7 76-3v29a14 14 0 0 1-14 14H58a14 14 0 0 1-14-14z',M2,{d:1}),
+  r(112,134,19,64,7,B),l('M122 162l22-17',B,8),c(126,86,44,M),c(94,110,30,M),c(162,104,33,M),c(130,116,30,M),
+  e(106,68,15,9,M2,{rot:-32,d:1}),c(156,74,5,B,{d:1}),c(92,124,4.500,B,{d:1}),c(176,112,4,B,{d:1}),...rosto(128,100,{s:1.2,cor:A})],
+ // pingado no copo americano com pão na chapa
+ 'cafes-padarias':[...flor(B),l('M108 72c-8-10 8-16 0-28M132 72c-8-10 8-16 0-28',W,7),
+  p('M86 84h68l-8 98a8 8 0 0 1-8 7h-36a8 8 0 0 1-8-7z',W),p('M88.600 112h62.800l-5.700 70a8 8 0 0 1-8 7h-36a8 8 0 0 1-8-7z',T,{d:1}),p('M88 104h64l-.7 12H88.700z',P,{d:1}),
+  l('M106 122l2 60M134 122l-2 60',W,3,{op:.16,d:1}),...rosto(120,146,{s:1.2,cor:A,boca:'o'}),
+  g('rotate(-16 70 178)',[e(70,178,36,21,P),l('M56 170l6 14M70 168l6 14M84 170l5 12',B2,5,{d:1})])],
+ // chope com colarinho escorrendo, em cima da bolacha
+ bares:[r(30,46,180,172,44,M,{rot:-4}),e(118,198,54,10,A),p('M80 74h80l-10 116a8 8 0 0 1-8 7h-44a8 8 0 0 1-8-7z',B2),l('M97 100l5 68',W,6,{op:.45,d:1}),
+  c(88,72,16,W),c(110,58,21,W),c(137,60,18,W),c(156,74,14,W),r(76,68,88,18,9,W),r(147,76,12,32,6,W),
+  c(106,178,3.400,W,{op:.6,d:1}),c(134,170,2.800,W,{op:.6,d:1}),...rosto(120,136,{s:1.25,boca:'aberta',bochecha:B})],
+ // prato feito: feijão, couve e um ovo por cima
+ restaurantes:[c(116,126,94,M),c(112,128,72,W,{d:1}),c(112,128,58,'none',{d:1}),l('M112 70a58 58 0 0 1 0 116a58 58 0 0 1 0-116',P,4,{d:1}),
+  c(134,146,24,T,{d:1}),c(114,158,17,T,{d:1}),c(148,126,15,T,{d:1}),c(80,140,19,M2,{d:1}),c(92,158,13,M2,{d:1}),c(72,122,12,M2,{d:1}),
+  c(108,104,27,P,{d:1}),c(88,98,15,P,{d:1}),c(130,96,17,P,{d:1}),c(112,122,17,P,{d:1}),c(108,104,19,B,{d:1}),...rosto(108,103,{s:.9}),
+  g('rotate(9 208 130)',[l('M198 76v22a10 10 0 0 0 20 0V76M208 76v104',B,8)])],
+ // o vão do MASP, com gente pequena embaixo
+ cultura:[r(28,38,184,176,42,P,{rot:3}),l('M52 188h136',M,6,{d:1}),r(58,104,124,44,7,M),l('M83 109v34M108 109v34M132 109v34M157 109v34',M2,3,{d:1}),
+  l('M46 188V92a10 10 0 0 1 10-10h128a10 10 0 0 1 10 10v96',B,15),...rosto(120,124,{s:1.15,cor:A}),
+  c(94,168,5,T,{d:1}),l('M94 176v9',T,5,{d:1}),c(142,170,4.500,T,{d:1}),l('M142 177v8',T,4.500,{d:1})],
+ // globo de espelhos girando
+ 'baladas-shows':[estrela(T),l('M120 20v48',A,5),c(120,128,58,A),
+  ...[[98,82,P],[118,80,B2],[138,84,P],[74,104,B2],[152,106,P],[72,146,P],[154,148,B2],[96,166,B2],[118,170,P],[140,164,W]].map(([x,y,f])=>r(x-8,y-8,16,16,4,f,{d:1})),
+  ...rosto(120,126,{s:1.4,boca:'aberta',bochecha:B2}),l('M36 92l15 9M30 130h17M204 92l-15 9M210 130h-17',B,7,{d:1})],
+ // pastel de feira mordido com caldo de cana
+ 'feiras-mercados':[arco(M),p('M150 94h42l-6 84a6 6 0 0 1-6 5h-22a6 6 0 0 1-6-5z',W),p('M151.400 114h39l-4.400 64a6 6 0 0 1-6 5h-22a6 6 0 0 1-6-5z',P,{d:1}),l('M172 104l13-50',B,7),
+  g('rotate(-9 114 152)',[r(58,116,116,76,15,B2),l('M70 130v48M162 130v48',B,5,{dash:'.1 9.500',d:1}),l('M74 180h84',B,5,{dash:'.1 9.500',d:1}),
+   c(62,118,15,M,{d:1}),c(79,113,8,M,{d:1}),c(58,136,7,M,{d:1}),...rosto(118,152,{s:1.35,bochecha:B})])],
+ // ingresso com o canhoto destacando
+ experiencias:[r(18,72,204,104,52,M,{rot:-8}),g('rotate(-8 120 124)',[p('M48 92h98v62H48v-17a14 14 0 0 0 0-28z',B),...rosto(98,121,{s:1.25,olho:'pisca'}),
+   g('rotate(9 154 154)',[p('M154 92h42v17a14 14 0 0 0 0 28v17h-42z',B2),c(176,123,6.500,M,{d:1})])])],
+ // dado de cara piscando: o "Me Surpreenda"
+ surpresa:[estrela(B,120,122,98,84,12),g('rotate(-10 120 122)',[r(70,72,100,100,24,W),c(94,96,7,T,{d:1}),c(146,96,7,T,{d:1}),c(94,148,7,T,{d:1}),c(146,148,7,T,{d:1}),...rosto(120,119,{s:1.3,olho:'pisca',bochecha:B2})])],
 };
-const w=(f,s)=>fs.writeFileSync(path.join(OUT,f),s);
+const attrs=a=>Object.entries(a).map(([k,v])=>` ${k}="${v}"`).join('');
+function desenha(itens,contorno){
+  return itens.map(([tag,a,o])=>{
+    if(tag==='g')return `<g${attrs(a)}>${desenha(o.itens,contorno)}</g>`;
+    if(contorno){ if(o.d)return ''; const b={...a};delete b.opacity;delete b['stroke-dasharray'];
+      const sw=(+a['stroke-width']||0)+15; if(b.fill!=='none')b.fill=W; return `<${tag}${attrs({...b,stroke:W,'stroke-width':sw,'stroke-linejoin':'round','stroke-linecap':'round'})}/>`; }
+    const b={...a}; if(o.sj){b.stroke=a.fill;b['stroke-width']=6;b['stroke-linejoin']='round';}
+    return `<${tag}${attrs(b)}/>`;
+  }).join('');
+}
+const adesivo=itens=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">${desenha(itens,true)}${desenha(itens,false)}</svg>\n`;
 fs.mkdirSync(path.join(OUT,'figurinhas'),{recursive:true});
-for(const [nome,[f,c,m,g]] of Object.entries(FIG))w(`figurinhas/${nome}.svg`,adesivo(f,c,m,g||0));
+for(const [nome,itens] of Object.entries(FIG))fs.writeFileSync(path.join(OUT,'figurinhas',nome+'.svg'),adesivo(itens));
 module.exports={FIG,adesivo};
 if(require.main===module)console.log('figurinhas geradas em',path.join(OUT,'figurinhas'));

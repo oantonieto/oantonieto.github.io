@@ -89,7 +89,7 @@ const IL={
  lugar:`<path d="M10 172h220M120 172c-32-36-46-58-46-82a46 46 0 0 1 92 0c0 24-14 46-46 82z"/>${o(120,90,15)}`,
 };
 const ilustra=(c,fundo,traco,det)=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200">${fundo?`<rect width="240" height="200" fill="${fundo}"/>`:''}<g fill="none" stroke="${traco}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">${c.replace(/DET/g,det)}</g></svg>\n`;
-for(const [n,c] of Object.entries(IL)){w(`ilustracoes/${n}.svg`,ilustra(c,'',COR.mata,COR.barro));w(`ilustracoes/${n}-sobre-mata.svg`,ilustra(c,'',COR.areia,COR.barro));}
+// (as ilustrações de traço saíram do kit; as figurinhas ficam em figurinhas.js)
 
 module.exports={COR,logo,simbolo,IC,IL,icone,ilustra,OUT};
 if(require.main===module)console.log('marca v2: arquivos SVG gerados em',OUT);
