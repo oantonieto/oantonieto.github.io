@@ -1,7 +1,7 @@
 // Guarda no aparelho o programa e as imagens do site, para a próxima visita abrir sem baixar tudo de novo.
 // A página em si vem sempre da internet primeiro, e é ela que aponta para a versão nova: ninguém fica preso.
 // Para desligar em uma emergência: troque este arquivo por um que só chame self.registration.unregister().
-const VERSAO = 'v1'
+const VERSAO = 'v2' // v2: marca nova (os arquivos de /marca têm o mesmo nome e estavam guardados)
 const PROGRAMA = `simbo-programa-${VERSAO}`
 const IMAGENS = `simbo-imagens-${VERSAO}`
 const PAGINA = `simbo-pagina-${VERSAO}`
