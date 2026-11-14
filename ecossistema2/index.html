@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simbó para instituições e plataformas</title>
-<meta name="description" content="A camada de descoberta urbana para instituições e plataformas em São Paulo. Piloto de 90 dias, sem custo e sem comissão.">
+<title>Simbó para bilheterias, plataformas e casas com agenda</title>
+<meta name="description" content="Uma porta a mais para a sua programação em São Paulo: o Simbó leva o público direto ao seu canal oficial, sem comissão e sem exclusividade.">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://simbo.app.br/ecossistema2">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Simbó">
-<meta property="og:title" content="Simbó para instituições e plataformas | Integração">
-<meta property="og:description" content="A camada de descoberta urbana para instituições e plataformas em São Paulo. Piloto de 90 dias, sem custo e sem comissão.">
+<meta property="og:title" content="Simbó para bilheterias, plataformas e casas com agenda | Parceria">
+<meta property="og:description" content="Uma porta a mais para a sua programação em São Paulo: o Simbó leva o público direto ao seu canal oficial, sem comissão e sem exclusividade.">
 <meta property="og:url" content="https://simbo.app.br/ecossistema2">
 <meta property="og:image" content="https://simbo.app.br/marca/og-ecossistema.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -113,9 +113,24 @@ h1{font-size:clamp(38px,5.6vw,82px);line-height:1.04;max-width:18ch;text-wrap:ba
 .fim .botoes{margin-top:36px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
 .fim .legal{margin-top:64px;font-size:14px;line-height:1.4;color:#D5E3DB;max-width:none}
 
+/* ===== Telas reais do app ===== */
+.telas{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;width:100%;margin-top:clamp(32px,4vw,48px);align-items:start}
+.telas figure{margin:0;background:#DDE8E1;border-radius:var(--raio);padding:12px}
+.telas img{width:100%;height:auto;border-radius:14px;background:#fff}
+.telas figcaption{margin-top:10px;font-size:15px;font-weight:600;color:var(--mata);text-align:left;padding-left:4px}
+/* ===== Portas de entrada e princípios: grade de 3 ===== */
+.grade3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;width:100%;margin-top:clamp(32px,4vw,48px);text-align:left}
+.porta{background:var(--surface);border-radius:var(--raio);padding:clamp(24px,2.4vw,32px)}
+.porta b{display:block;font-size:21px;font-weight:600;color:var(--mata);line-height:1.25}
+.porta span{display:block;margin-top:8px;color:var(--muted);font-size:17px;line-height:1.45}
+.principio .num{width:44px;height:44px;border-radius:50%;background:var(--mata);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 0 16px}
+.nota-forte{margin:20px auto 0;text-align:center;font-weight:600;color:var(--mata);max-width:none}
+.col.pede li span:only-child{color:var(--ink)}
+
 /* ===== Telefone ===== */
 @media (max-width:820px){
-  .cartoes,.troca{grid-template-columns:1fr}
+  .cartoes,.troca,.grade3,.telas{grid-template-columns:1fr}
+  h1{font-size:34px}
   .topo .btn{padding:0 16px}
   .janela{width:100%}
   .celular{position:relative;right:auto;bottom:auto;width:54%;margin:-20% 0 0 auto}
@@ -140,11 +155,11 @@ h1{font-size:clamp(38px,5.6vw,82px);line-height:1.04;max-width:18ch;text-wrap:ba
 <main id="conteudo">
 <!-- 1. Hero -->
 <section class="miolo centro hero">
-  <h1>A camada de descoberta urbana para instituições e plataformas em São Paulo.</h1>
-  <p class="sub rv" style="--i:1">Conectamos quem está decidindo o que fazer agora aos canais oficiais da sua rede, da sua programação cultural ou da sua base de clientes.</p>
+  <h1>Uma porta a mais para a sua programação.</h1>
+  <p class="sub rv" style="--i:1">O Simbó leva quem está decidindo o que fazer agora até o canal oficial da sua bilheteria, plataforma ou casa. Não substitui o que você já faz, não cobra comissão e não pede exclusividade.</p>
   <div class="acao rv" style="--i:2">
     <a class="btn" href="https://wa.me/5511973531287">Marcar uma conversa</a>
-    <a class="link" href="mailto:antonio@simbo.app.br?subject=Piloto%20de%20integra%C3%A7%C3%A3o%20com%20o%20Simb%C3%B3">antonio@simbo.app.br</a>
+    <a class="link" href="mailto:antonio@simbo.app.br?subject=Parceria%20com%20o%20Simb%C3%B3">antonio@simbo.app.br</a>
   </div>
 </section>
 
@@ -155,70 +170,139 @@ h1{font-size:clamp(38px,5.6vw,82px);line-height:1.04;max-width:18ch;text-wrap:ba
     <div class="cartao rv" style="--i:1"><span class="n" data-count="156">156</span><span class="l">eventos ativos</span></div>
     <div class="cartao rv" style="--i:2"><span class="n"><span data-count="100">100</span>%</span><span class="l">orgânico, por clima e metrô</span></div>
   </div>
+  <p class="nota-forte rv" style="--i:3">Estamos no começo: o catálogo está pronto e a audiência está em construção.</p>
 </section>
 
-<!-- 3. Produto -->
+<!-- 3. Como as pessoas chegam -->
+<section class="miolo centro sec" aria-labelledby="t-portas">
+  <h2 id="t-portas" class="rv">Várias portas para a mesma programação</h2>
+  <p class="sub rv" style="--i:1">A decisão de sair nasce antes da compra: numa indicação, num post, num comentário. O Simbó está nesse momento, com a resposta que a pessoa procura.</p>
+  <div class="telas">
+    <figure class="rv"><img src="fotos/tela-momento.png" width="756" height="620" alt="Tela de Eventos do Simbó com os atalhos Hoje, Amanhã, Fim de semana e Grátis" loading="lazy"><figcaption>Por momento</figcaption></figure>
+    <figure class="rv" style="--i:1"><img src="fotos/tela-preco.png" width="720" height="530" alt="Filtro de faixa de preço do Simbó com Até R$ 35 marcado" loading="lazy"><figcaption>Por preço</figcaption></figure>
+    <figure class="rv" style="--i:2"><img src="fotos/tela-metro.png" width="720" height="360" alt="Página do Teatro Santander com o selo Colado no metrô" loading="lazy"><figcaption>Perto do metrô</figcaption></figure>
+  </div>
+  <div class="grade3">
+    <div class="porta rv"><b>Perto de você</b><span>Em São Paulo, a pessoa abre o app e vê o que está por perto.</span></div>
+    <div class="porta rv" style="--i:1"><b>Por momento</b><span>Hoje, amanhã ou no fim de semana, na hora de decidir.</span></div>
+    <div class="porta rv" style="--i:2"><b>Por preço</b><span>O filtro vem primeiro: do grátis ao mais caro.</span></div>
+    <div class="porta rv"><b>Perto do metrô</b><span>Estação mais próxima e minutos a pé em cada página.</span></div>
+    <div class="porta rv" style="--i:1"><b>Pela página da casa</b><span>Quem encontra um teatro ou uma casa de show vê os eventos dela.</span></div>
+    <div class="porta rv" style="--i:2"><b>Seleções e campanhas</b><span>Recortes por tema e região, para levar o público até a sua agenda.</span></div>
+  </div>
+</section>
+
+<!-- 4. Produto -->
 <section class="miolo centro sec" id="produto" aria-labelledby="t-produto">
   <h2 id="t-produto" class="rv">Do contexto ao canal oficial</h2>
-  <p class="sub rv" style="--i:1">A pessoa filtra o que combina com o momento e segue em um toque para o site ou a bilheteria da organização, sem pedágio no caminho.</p>
+  <p class="sub rv" style="--i:1">A pessoa filtra o que combina com o momento e segue em um toque para o site, a bilheteria ou a reserva. A venda acontece no seu canal.</p>
   <div class="palco rv" style="--i:2">
     <div class="janela"><img src="fotos/app-mapa.png" width="1280" height="800" alt="O mapa do Simbó no computador, com filtros e lugares de São Paulo" loading="lazy"></div>
     <div class="celular"><img src="fotos/app-celular.png" width="780" height="1688" alt="A página do Teatro Santander no celular, com foto, preço, estação de metrô e o botão Como chegar" loading="lazy"></div>
   </div>
 </section>
 
-<!-- 4. A troca -->
+<!-- 5. O princípio -->
+<section class="miolo centro sec" aria-labelledby="t-principio">
+  <h2 id="t-principio" class="rv">Somar, nunca substituir</h2>
+  <div class="grade3">
+    <div class="porta principio rv"><span class="num" aria-hidden="true">1</span><b>Não substitui</b><span>A venda continua no seu canal, do jeito que já funciona hoje.</span></div>
+    <div class="porta principio rv" style="--i:1"><span class="num" aria-hidden="true">2</span><b>Não canibaliza</b><span>O link de ingresso é direto. O Simbó não intermedia e não cobra comissão.</span></div>
+    <div class="porta principio rv" style="--i:2"><span class="num" aria-hidden="true">3</span><b>Sem exclusividade</b><span>Você segue em todos os canais. O Simbó é mais um jeito de ser encontrado.</span></div>
+  </div>
+</section>
+
+<!-- 6. Onde estamos -->
+<section class="miolo centro sec" aria-labelledby="t-onde">
+  <h2 id="t-onde" class="rv">No começo, e por isso medimos tudo</h2>
+  <div class="troca">
+    <div class="col pede rv">
+      <h3>Já está no ar</h3>
+      <ul>
+        <li><span>Catálogo curado de São Paulo, com páginas por casa</span></li>
+        <li><span>Eventos catalogados por local</span></li>
+        <li><span>Site e app funcionando, com filtros de preço e metrô</span></li>
+      </ul>
+    </div>
+    <div class="col recebe rv" style="--i:1">
+      <h3>Como vamos crescer</h3>
+      <ul>
+        <li>Descoberta orgânica e links com origem em cada campanha</li>
+        <li>Campanhas por região e recorte, com geolocalização</li>
+        <li>Parcerias com casas e bilheterias</li>
+      </ul>
+    </div>
+  </div>
+  <p class="sub rv" style="--i:2;margin-top:28px">Não prometemos uma audiência que ainda não existe. Medimos cada clique levado ao seu canal e mostramos todo mês.</p>
+</section>
+
+<!-- 7. A troca -->
 <section class="miolo centro sec" aria-labelledby="t-troca">
   <h2 id="t-troca" class="rv">O que entregamos e o que pedimos</h2>
   <div class="troca">
     <div class="col recebe rv">
-      <h3>O que a sua operação recebe</h3>
+      <h3>O que entregamos</h3>
       <ul>
-        <li>Unidades e programação em páginas próprias, dentro do guia</li>
-        <li>Descoberta por contexto: momento, preço e distância do metrô</li>
-        <li>Tráfego levado direto ao seu portal, bilheteria ou agenda</li>
-        <li>Piloto de 90 dias, sem custo e sem comissão</li>
+        <li>Página da casa e agenda por local, com link direto ao ingresso</li>
+        <li>Espaço no ecossistema de parceiros, com logo e selo &quot;Parceiro&quot;</li>
+        <li>Destaques e banners, sem custo para parceiros fundadores</li>
+        <li>Relatório mensal de cliques levados ao seu canal</li>
+        <li>Imagens usadas com crédito e link, só com a sua autorização</li>
       </ul>
     </div>
     <div class="col pede rv" style="--i:1">
-      <h3>O que pedimos de volta</h3>
+      <h3>O que pedimos</h3>
       <ul>
-        <li><b>Uma fonte oficial</b><span>Planilha, agenda ou página que sirva de referência para horários e programação.</span></li>
-        <li><b>Links e imagens autorizados</b><span>Bilheteria, reserva e as fotos que a instituição libera.</span></li>
-        <li><b>Um contato técnico</b><span>Quem possa validar os dados e avisar quando algo mudar.</span></li>
+        <li><b>Acesso aos dados de eventos</b><span>Feed, planilha ou API somente leitura com a agenda de São Paulo, para o catálogo ficar sempre atualizado.</span></li>
+        <li><b>Links e imagens autorizados</b><span>O link de ingresso de cada evento e as imagens que podem ser exibidas.</span></li>
+        <li><b>Um contato comercial ou técnico</b><span>E, quando fizer sentido, um cupom, uma pré-venda ou uma cortesia para o público.</span></li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- 5. Piloto -->
+<!-- 8. Como começa -->
 <section class="miolo centro sec" id="piloto" aria-labelledby="t-piloto">
-  <h2 id="t-piloto" class="rv">Piloto de 90 dias. Sem custo, sem risco.</h2>
+  <h2 id="t-piloto" class="rv">Parceiro fundador. Sem custo, sem prazo fixo.</h2>
   <ol class="passos">
     <li class="rv"><span class="num" aria-hidden="true">1</span><div><b>Alinhamento</b><span>Conversa de 15 minutos para definir escopo e formato.</span></div></li>
-    <li class="rv" style="--i:1"><span class="num" aria-hidden="true">2</span><div><b>Integração simples</b><span>Em até 5 dias úteis, validamos a base de dados e os links da sua rede.</span></div></li>
-    <li class="rv" style="--i:2"><span class="num" aria-hidden="true">3</span><div><b>Vai pro ar</b><span>Sua operação ganha visibilidade por contexto, por 90 dias.</span></div></li>
+    <li class="rv" style="--i:1"><span class="num" aria-hidden="true">2</span><div><b>Integração simples</b><span>Em até 5 dias úteis, validamos os dados e os links.</span></div></li>
+    <li class="rv" style="--i:2"><span class="num" aria-hidden="true">3</span><div><b>No ar, com relatório</b><span>Visibilidade por contexto e, todo mês, os cliques levados ao seu canal.</span></div></li>
   </ol>
+  <p class="sub rv" style="--i:3;margin-top:28px;font-size:17px">Condições travadas para quem entra agora. Qualquer mudança é avisada com 60 dias de antecedência.</p>
 </section>
 
-<!-- 6. Já no mapa -->
+<!-- 9. Quem ainda não está no mapa -->
+<section class="miolo centro sec" id="espaco" aria-labelledby="t-espaco">
+  <h2 id="t-espaco" class="rv">A sua casa ou plataforma ainda não está no mapa?</h2>
+  <p class="sub rv" style="--i:1">Crie o seu espaço. Depois de aprovado pela curadoria, você pode solicitar anúncio.</p>
+  <ol class="passos">
+    <li class="rv"><span class="num" aria-hidden="true">1</span><div><b>Crie o seu espaço</b><span>Conte quem é, onde fica e envie fotos, horários e links oficiais.</span></div></li>
+    <li class="rv" style="--i:1"><span class="num" aria-hidden="true">2</span><div><b>A curadoria aprova</b><span>Revisamos os dados e a página entra no mapa, com a sua confirmação.</span></div></li>
+    <li class="rv" style="--i:2"><span class="num" aria-hidden="true">3</span><div><b>Depois, solicite anúncio</b><span>Com o espaço aprovado, você pode pedir destaque, sempre com o selo &quot;Parceiro&quot;.</span></div></li>
+  </ol>
+  <p class="sub rv" style="--i:3;margin-top:28px;font-size:16px">Anúncio nunca compra posição na curadoria: nota, ranking e Me Surpreenda não dependem de pagamento.</p>
+  <a class="btn rv" style="--i:3;margin-top:24px" href="https://wa.me/5511973531287">Quero criar o meu espaço</a>
+</section>
+
+<!-- 10. Já no mapa -->
 <section class="miolo centro sec" aria-labelledby="t-mapa">
-  <h2 id="t-mapa" class="rv">Já estão no mapa</h2>
-  <p class="sub rv" style="--i:1">Páginas montadas pela nossa curadoria com dados públicos, prontas para as instituições assumirem.</p>
+  <h2 id="t-mapa" class="rv">Casas com agenda já estão no mapa</h2>
+  <p class="sub rv" style="--i:1">Páginas montadas pela nossa curadoria com dados públicos, prontas para as casas assumirem.</p>
   <ul class="pilulas rv" style="--i:2">
-    <li>Theatro Municipal</li><li>Teatro Santander</li><li>Blue Note São Paulo</li><li>Estação Pinacoteca</li><li>Bar Brahma</li><li>Esther Rooftop</li>
+    <li>Blue Note São Paulo</li><li>Teatro Santander</li><li>Itaú Cultural</li><li>Reserva Cultural</li><li>Estação Pinacoteca</li><li>Casa Mário de Andrade</li><li>Theatro Municipal</li>
   </ul>
 </section>
 </main>
 
-<!-- 7. Rodapé único -->
+<!-- 11. Rodapé único -->
 <footer class="fim" id="contato">
   <div class="miolo centro">
-    <h2 class="rv">Vamos desenhar um piloto de integração?</h2>
-    <p class="sub rv" style="--i:1">Quinze minutos de conversa para entender a sua rede e ver o que faz sentido integrar. Sem compromisso.</p>
+    <h2 class="rv">Vamos conversar?</h2>
+    <p class="sub rv" style="--i:1">Quinze minutos para ver o que faz sentido integrar. Sem compromisso e sem exclusividade.</p>
     <div class="botoes rv" style="--i:2">
       <a class="btn claro" href="https://wa.me/5511973531287">Falar no WhatsApp</a>
-      <a class="btn vidro" href="mailto:antonio@simbo.app.br?subject=Piloto%20de%20integra%C3%A7%C3%A3o%20com%20o%20Simb%C3%B3">antonio@simbo.app.br</a>
+      <a class="btn vidro" href="mailto:antonio@simbo.app.br?subject=Parceria%20com%20o%20Simb%C3%B3">antonio@simbo.app.br</a>
     </div>
     <p class="legal">Simbó · simbo.app.br · Curadoria independente de São Paulo. As telas mostradas são do próprio app do Simbó.</p>
   </div>
