@@ -233,7 +233,7 @@ ir(Math.max(0,(parseInt(location.hash.slice(1),10)||1)-1));
   var K="phc_AJrXE3nHL2EswyFsZn24tQs7vqBnDhDwdq7QECpTi5R6",H='https://us.i.posthog.com/capture/',id;
   try{id=localStorage.getItem('simbo.proposta.id');if(!id){id='proposta-'+Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('simbo.proposta.id',id)}}catch(e){id='proposta-'+Math.random().toString(36).slice(2)}
   var origem=(new URLSearchParams(location.search)).get('origem')||'direto',vistos={};
-  function enviar(evento,extra){try{var p={origem:origem,pagina:'proposta-plataformas',$current_url:location.href,$host:location.host};for(var k in extra)p[k]=extra[k];fetch(H,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({api_key:K,event:evento,distinct_id:id,properties:p})}).catch(function(){})}catch(e){}}
+  function enviar(evento,extra){try{var p={origem:origem,pagina:location.pathname,$current_url:location.href,$host:location.host};for(var k in extra)p[k]=extra[k];fetch(H,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},body:JSON.stringify({api_key:K,event:evento,distinct_id:id,properties:p})}).catch(function(){})}catch(e){}}
   enviar('proposta_aberta',{});
   var original=ir;
   ir=function(n){original(n);if(!vistos[atual]){vistos[atual]=1;enviar('proposta_slide_visto',{slide:atual+1,de:lista.length})}};
