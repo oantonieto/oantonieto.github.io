@@ -2,7 +2,7 @@
 // o Instagram e os buscadores mostrarem o nome e a descrição dela. Quem abre no navegador recebe o mesmo app e ele mostra a lista.
 // Os dois valores abaixo são trocados na publicação (scripts/juntar-web-no-site.mjs) pelo endereço e pela chave PÚBLICA do Supabase,
 // que o app já distribui a todo mundo; a chave só lê o que a RLS libera (lista pública e no ar).
-const SUPABASE_URL = 'https://dvmsggkofviyutwtmrqa.supabase.co'
+const SUPABASE_URL = 'https://auth.simbo.app.br'
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2bXNnZ2tvZnZpeXV0d3RtcnFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM4MDUyNTMsImV4cCI6MjEwOTM4MTI1M30.90Pcl5qzCythEzW-VOBPM74RbwR63xRZts_qZYBiYek'
 const SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/
 
