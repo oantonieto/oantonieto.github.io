@@ -5,3 +5,10 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), payment=(), usb=()
   Strict-Transport-Security: max-age=31536000
+
+# Arquivos com o conteúdo no nome (hash) nunca mudam: o navegador pode guardar por um ano sem perguntar de novo.
+# Só o que o Expo gera com hash. A página (index.html), /marca e /fontes ficam de fora: podem mudar sem trocar de nome.
+/_expo/static/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
